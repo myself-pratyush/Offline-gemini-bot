@@ -29,7 +29,7 @@ client = Client(twilio_account_sid, twilio_auth_token)
 last_message = None
 last_sender_number = None
 
-@app.route("/sms", methods=['GET', 'POST'])
+@app.route("/", methods=['GET', 'POST'])
 def sms_reply():
     """Reply to incoming SMS messages."""
     global last_message, last_sender_number
@@ -62,17 +62,17 @@ def sms_reply():
     return "Message sent!"  # Confirmation message for the /sms route
 
 
-@app.route("/", methods=['GET'])
-def homepage():
-    """Display the latest message sent and the sender's number."""
-    if last_message and last_sender_number:
-        return render_template_string("""
-            <h1>Latest SMS Response</h1>
-            <p><strong>Sender:</strong> {{ sender_number }}</p>
-            <p><strong>Message:</strong> {{ message }}</p>
-        """, sender_number=last_sender_number, message=last_message)
-    else:
-        return "<h1>Welcome to the SMS App</h1><p>No messages sent yet.</p>"
+# @app.route("/", methods=['GET'])
+# def homepage():
+#     """Display the latest message sent and the sender's number."""
+#     if last_message and last_sender_number:
+#         return render_template_string("""
+#             <h1>Latest SMS Response</h1>
+#             <p><strong>Sender:</strong> {{ sender_number }}</p>
+#             <p><strong>Message:</strong> {{ message }}</p>
+#         """, sender_number=last_sender_number, message=last_message)
+#     else:
+#         return "<h1>Welcome to the SMS App</h1><p>No messages sent yet.</p>"
 
 
 # Reserve a subdomain on ngrok
